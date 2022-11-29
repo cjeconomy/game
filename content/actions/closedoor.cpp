@@ -28,3 +28,4 @@ Result CloseDoor::perform(Engine& engine) {
         return failure();
     }
 }
+
