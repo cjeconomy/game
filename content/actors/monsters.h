@@ -13,5 +13,3 @@
 
 std::unique_ptr<Action> default_behavior(Engine& engine, Monster& me); 
 MonsterType goblin(); 
-MonsterType orc_shaman();
-MonsterType demon_big();
