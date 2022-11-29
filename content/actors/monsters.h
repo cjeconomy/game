@@ -1,7 +1,3 @@
 #pragma once
 
-namespace Monsters {
-    
-
-
-}
+namespace Monsters {}

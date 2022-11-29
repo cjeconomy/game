@@ -3,9 +3,11 @@
 #include <iostream>
 
 #include "actor.h"
+#include "closedoor.h"
 #include "door.h"
 #include "dungeon.h"
 #include "engine.h"
+#include "opendoor.h"
 #include "tile.h"
 
 Move::Move(Vec direction) : direction{direction} {}
@@ -19,8 +21,11 @@ Result Move::perform(Engine& engine) {
     if (tile.is_wall() || tile.actor) {
         return failure();
     } else if (tile.is_door()) {
-        return failure();  // Will be replaced with return
-                           // alternative(OpenDoor{position});
+        Door& door = engine.dungeon.doors.at(position);
+        if (!door_is_open()) {
+            return alternative(OpenDoor{position});
+        }  // Will be replaced with return
+           // alternative(OpenDoor{position});
     } else {
         actor->move_to(new_position);
         return success();
