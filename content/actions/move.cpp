@@ -23,7 +23,7 @@ Result Move::perform(Engine & engine) {
     } else if (tile.is_door()) {
         Door& door = engine.dungeon.doors.at(new_position);
         if (!door.is_open()) {
-            return alternative(OpenDoor{new_position});
+            return failure();
         }
     } else {
         actor->move_to(new_position);
