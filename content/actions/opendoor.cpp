@@ -16,9 +16,6 @@ Result OpenDoor::perform(Engine& engine) {
             Door& door = engine.dungeon.doors.at(neighbor);
             door.open();
             opened_any_doors = true;
-            std::cout << "Door at " << neighbor << '\n';
-        } else {
-            std::cout << "Floor at " << neighbor << '\n';
         }
     }
     if (opened_any_doors) {
