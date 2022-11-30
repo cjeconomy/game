@@ -5,4 +5,6 @@
 class OpenDoor : public Action {
 public:
     Result perform(Engine& engine) override;
+
+private:
 };

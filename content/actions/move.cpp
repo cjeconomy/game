@@ -3,6 +3,7 @@
 #include <iostream>
 
 #include "actor.h"
+#include "attack.h"
 #include "closedoor.h"
 #include "door.h"
 #include "dungeon.h"
@@ -30,4 +31,7 @@ Result Move::perform(Engine& engine) {
         return success();
     };  // always return something (success, failure,
         // alternative.)
+    /* if (tile.actor) {
+        return alternative(Attack{tile.actor});
+    } */
 }
