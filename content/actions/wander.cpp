@@ -1,5 +1,6 @@
 #include "wander.h"
 
+Result CloseDoor::perform(Engine& engine) {
 std::unique_ptr<Action> default_behavior(Engine& engine, Monster& me) { 
     // pursue Hero if monster can see him (If Hero sees me, I see him) 
     if (me.is_visible() && engine.hero) { 
@@ -18,3 +19,4 @@ std::unique_ptr<Action> default_behavior(Engine& engine, Monster& me) {
     else { 
         return std::make_unique<Rest>(); 
     } 
+}
