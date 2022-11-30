@@ -6,7 +6,7 @@
 
 Hit::Hit(Actor& actor, int damage) : actor{actor}, damage{damage} {}
 
-void Hit::execute(Engine&) {
+void Hit::execute(Engine& engine) {
     actor.take_damage(damage);
 
     // remove the actor if dead
