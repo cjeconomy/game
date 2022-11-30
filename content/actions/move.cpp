@@ -12,7 +12,7 @@
 
 Move::Move(Vec direction) : direction{direction} {}
 
-Result Move::perform(Engine & engine) {
+Result Move::perform(Engine& engine) {
     Vec position = actor->get_position();
     Vec new_position = position + direction;
     actor->change_direction(direction);
@@ -23,7 +23,7 @@ Result Move::perform(Engine & engine) {
     } else if (tile.is_door()) {
         Door& door = engine.dungeon.doors.at(new_position);
         if (!door.is_open()) {
-            return failure();
+            return alternative(OpenDoor{new_position});
         }
     } else {
         actor->move_to(new_position);
@@ -31,4 +31,3 @@ Result Move::perform(Engine & engine) {
     };  // always return something (success, failure,
         // alternative.)
 }
-
