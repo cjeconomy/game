@@ -1,25 +1,7 @@
 #include "monsters.h"
-
-std::unique_ptr<Action> default_behavior(Engine&, Monster&) {
-    return std::make_unique<Rest>();
-}
-int default_speed = 8;
-MonsterType goblin() {
-    int health = 2;
-    return {"goblin", default_speed, health, std::make_shared<None>(),
-            default_behavior};
-}
-MonsterType orc_shaman() {
-    int health = 3;
-    return {"orc_shaman", default_speed, health, std::make_shared<None>(),
-            default_behavior};
-}
-
-MonsterType demon_big() {
-    int health = 5;
-    return {"demon_big", default_speed, health, std::make_shared<None>(),
-            default_behavior};
-}
+#include "monster.h"
+#include "randomness.h"
+#include "monstertype.h"
 
 std::unique_ptr<Action> default_behavior(Engine& engine, Monster& me) { 
     // pursue Hero if monster can see him (If Hero sees me, I see him) 
@@ -39,3 +21,22 @@ std::unique_ptr<Action> default_behavior(Engine& engine, Monster& me) {
     else { 
         return std::make_unique<Rest>(); 
     } 
+}
+
+constexpr int default_speed = 8;
+MonsterType goblin() {
+    int health = 2;
+    return {"goblin", default_speed, health, std::make_shared<None>(),
+            default_behavior};
+}
+MonsterType orc_shaman() {
+    int health = 3;
+    return {"orc_shaman", default_speed, health, std::make_shared<None>(),
+            default_behavior};
+}
+
+MonsterType demon_big() {
+    int health = 5;
+    return {"demon_big", default_speed, health, std::make_shared<None>(),
+            default_behavior};
+}
