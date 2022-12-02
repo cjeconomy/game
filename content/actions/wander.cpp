@@ -1,22 +1,27 @@
 #include "wander.h"
 
-Result CloseDoor::perform(Engine& engine) {
-std::unique_ptr<Action> default_behavior(Engine& engine, Monster& me) { 
-    // pursue Hero if monster can see him (If Hero sees me, I see him) 
-    if (me.is_visible() && engine.hero) { 
-        Vec from = me.get_position(); 
-        Vec to = engine.hero->get_position(); 
-        std::vector<Vec> path = engine.dungeon.calculate_path(from, to); 
-        if (path.size() > 1) { 
-            Vec direction = path.at(1) - path.at(0); 
-            return std::make_unique<Move>(direction); 
-        } 
-    } 
-    // Monster doesn't see Hero 
-    if (probability(66)) { 
-        return std::make_unique<Wander>(); 
-    } 
-    else { 
-        return std::make_unique<Rest>(); 
-    } 
+
+
+
+#include "actor.h"
+#include "engine.h"
+#include "monster.h"
+#include "move.h"
+#include "tile.h"
+
+
+Wander::Wander(Vec position) : position{position} {}
+
+Result Wander::perform(Engine& engine) {
+    Vec pos = actor->get_position();
+    std::vector<Vec> neighbors = engine.dungeon.neighbors(pos);
+    // randomize directions
+    shuffle(std::begin(neighbors), std::end(neighbors));
+    for (const Vec& neighbor : neighbors) {
+        Tile& tile = engine.dungeon.tiles(neighbor);
+        if (!tile.is_wall() && !tile.actor) {
+            Vec direction = neighbor - position;
+            return alternative(Move{direction});
+        }
+    }
 }
