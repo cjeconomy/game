@@ -3,7 +3,6 @@
 #include <iostream>
 
 #include "actor.h"
-#include "attack.h"
 #include "closedoor.h"
 #include "door.h"
 #include "dungeon.h"
@@ -21,16 +20,19 @@ Result Move::perform(Engine& engine) {
     Tile& tile = engine.dungeon.tiles(new_position);
     if (tile.is_wall() || tile.actor) {
         return failure();
-    } else if (tile.is_door()) {
+    }
+
+    if (tile.is_door()) {
         Door& door = engine.dungeon.doors.at(new_position);
         if (!door.is_open()) {
             return alternative(OpenDoor{new_position});
         }
-    } else {
-        actor->move_to(new_position);
-        return success();
-    };  // always return something (success, failure,
-        // alternative.)
+    }
+
+    actor->move_to(new_position);
+    return success();
+    // always return something (success, failure,
+    // alternative.)
     /* if (tile.actor) {
         return alternative(Attack{tile.actor});
     } */
