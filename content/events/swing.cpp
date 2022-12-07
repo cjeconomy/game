@@ -6,7 +6,7 @@
 #include "event.h"
 #include "hit.h"
 
-constexpr int duration = 10;
+constexpr int duration = 5;
 
 Swing::Swing(Sprite& sprite, Vec direction, Actor& defender, int damage)
     : Event{duration},
