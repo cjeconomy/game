@@ -17,6 +17,10 @@ std::unique_ptr<Action> default_behavior(Engine& engine, Monster& me) {
             Vec direction = path.at(1) - path.at(0);
             return std::make_unique<Move>(direction);
         }
+        if (me.is_fearful()) {
+            Vec direction = path.at(1) - path.at(0);
+            return std::make_unique<Move>(direction);
+        }
     }
     // Monster doesn't see Hero
     if (probability(66)) {
