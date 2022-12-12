@@ -18,7 +18,9 @@ public:
     virtual void move_to(const Vec& position);
     const Vec& get_position() const;
     bool is_visible() const;
-    bool is_fearful();
+    bool is_fearful() {
+        return fearful;
+    }
     void set_fear(bool fearful);
 
     void take_damage(int amount);
