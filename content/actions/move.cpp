@@ -3,6 +3,7 @@
 #include <iostream>
 
 #include "actor.h"
+#include "attack.h"
 #include "closedoor.h"
 #include "door.h"
 #include "dungeon.h"
@@ -29,11 +30,12 @@ Result Move::perform(Engine& engine) {
         }
     }
 
+    if (tile.actor) {
+        return alternative(Attack{*tile.actor});
+    }
+
     actor->move_to(new_position);
     return success();
     // always return something (success, failure,
     // alternative.)
-    /* if (tile.actor) {
-        return alternative(Attack{tile.actor});
-    } */
 }
