@@ -1,8 +1,8 @@
 #include "engine.h"
 #include "heros.h"
+#include "monster.h"
 #include "monsters.h"
 #include "monstertype.h"
-#include "monster.h"
 
 int main() {
     std::string filename{"settings.txt"};
@@ -11,10 +11,16 @@ int main() {
 
     engine.create_hero(Heros::wizard);
     MonsterType new_monster_type = goblin();
-    engine.create_monster(new_monster_type);
+    for (int i = 0; i < 10; ++i) {
+        engine.create_monster(new_monster_type);
+    }
     MonsterType shaman_orc = orc_shaman();
-    engine.create_monster(shaman_orc);
+    for (int i = 0; i < 5; ++i) {
+        engine.create_monster(shaman_orc);
+    }
     MonsterType big_demon = demon_big();
-    engine.create_monster(big_demon);
+    for (int i = 0; i > 3; ++i) {
+        engine.create_monster(big_demon);
+    }
     engine.run();
 }
