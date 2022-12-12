@@ -15,13 +15,14 @@ std::unique_ptr<Action> default_behavior(Engine& engine, Monster& me) {
         std::vector<Vec> path = engine.dungeon.calculate_path(from, to);
         if (path.size() > 1) {
             Vec direction = path.at(1) - path.at(0);
-            return std::make_unique<Move>(direction);
-        }
-        if (me.is_fearful()) {
-            Vec direction = path.at(1) - path.at(0);
+            if (me.is_fearful()) {
+                Vec direction = path.at(0) - path.at(1);
+                return std::make_unique<Move>(direction);
+            }
             return std::make_unique<Move>(direction);
         }
     }
+
     // Monster doesn't see Hero
     if (probability(66)) {
         return std::make_unique<Wander>();
