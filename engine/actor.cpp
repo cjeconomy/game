@@ -51,6 +51,6 @@ void Actor::take_damage(int amount) {
     health -= amount;
 }
 
-void Actor::set_fear(bool fearful) {
-    fearful = false;
+void Actor::set_fear(bool fear) {
+    fearful = fear;
 }
