@@ -1,13 +1,13 @@
 #pragma once
 
-#include "vec.h"
-#include "sprite.h"
 #include <memory>
+
+#include "sprite.h"
+#include "vec.h"
 
 // forward declarations
 class Engine;
 class Action;
-
 
 // base class for all interacting beings
 class Actor {
@@ -18,10 +18,12 @@ public:
     virtual void move_to(const Vec& position);
     const Vec& get_position() const;
     bool is_visible() const;
+    bool is_fearful() const;
+    void set_fear(bool fearful);
 
     void take_damage(int amount);
     virtual void attack(Actor& defender) = 0;
-    
+
     virtual void update() = 0;
     virtual std::unique_ptr<Action> take_turn() = 0;
     virtual std::vector<Sprite> get_sprites() const = 0;
@@ -35,12 +37,13 @@ public:
     int health;
     bool alive;
 
-    
     // teams can be used to determine who can attack whom
     int team;
 
     // speed is energy gain per turn, once an actor has enough energy
     // it can take a turn
     int speed, energy;
-};
 
+private:
+    bool fearful;
+};
