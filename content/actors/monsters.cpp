@@ -14,11 +14,11 @@ std::unique_ptr<Action> default_behavior(Engine& engine, Monster& me) {
         Vec to = engine.hero->get_position();
         std::vector<Vec> path = engine.dungeon.calculate_path(from, to);
         if (path.size() > 1) {
-            Vec direction = path.at(1) - path.at(0);
             if (me.is_fearful()) {
                 Vec direction = path.at(0) - path.at(1);
                 return std::make_unique<Move>(direction);
             }
+            Vec direction = path.at(1) - path.at(0);
             return std::make_unique<Move>(direction);
         }
     }
