@@ -1,5 +1,7 @@
 #include "monsters.h"
 
+#include "attack.h"
+#include "dungeon.h"
 #include "knife.h"
 #include "monster.h"
 #include "monstertype.h"
