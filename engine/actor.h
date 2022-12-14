@@ -19,7 +19,8 @@ public:
     const Vec& get_position() const;
     bool is_visible() const;
     bool is_fearful() {
-        return fearful;
+        return fearful;  // How to fear the monster and also uses private data
+                         // member
     }
     void set_fear(bool fearful);
 
