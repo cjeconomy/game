@@ -16,10 +16,13 @@ std::unique_ptr<Action> default_behavior(Engine& engine, Monster& me) {
         Vec to = engine.hero->get_position();
         std::vector<Vec> path = engine.dungeon.calculate_path(from, to);
         if (path.size() > 1) {
-            if (me.is_fearful()) {
-                Vec direction = path.at(0) - path.at(1);
+            if (me.is_fearful()) {  // Incorporating fear into the monster class
+                Vec direction =
+                    path.at(0) -
+                    path.at(1);  // If feared, make them turn the opposite path
                 Tile& tile = engine.dungeon.tiles(from + direction);
-                if (tile.is_wall()) {
+                if (tile.is_wall()) {  // No longer crashes after monster runs
+                                       // into wall
                     return std::make_unique<Rest>();
                 }
                 return std::make_unique<Move>(direction);
