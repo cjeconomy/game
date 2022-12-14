@@ -16,6 +16,10 @@ std::unique_ptr<Action> default_behavior(Engine& engine, Monster& me) {
         if (path.size() > 1) {
             if (me.is_fearful()) {
                 Vec direction = path.at(0) - path.at(1);
+                Tile& tile = engine.dungeon.tiles(from + direction);
+                if (tile.is_wall()) {
+                    return std::make_unique<Rest>();
+                }
                 return std::make_unique<Move>(direction);
             }
             Vec direction = path.at(1) - path.at(0);
